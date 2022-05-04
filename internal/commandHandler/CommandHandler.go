@@ -2,6 +2,7 @@ package commandHandler
 
 import (
 	"cli/internal/commands"
+	"cli/internal/flagHandler"
 	"github.com/fatih/color"
 	"github.com/urfave/cli/v2"
 )
@@ -20,6 +21,7 @@ func (h InternalHandler) HandleCommand() []*cli.Command {
 			Aliases: []string{"i"},
 			Usage:   "Creates a project base on a template",
 			Action:  commands.InitCommand,
+			Flags:   []cli.Flag{flagHandler.InitGitFlag, flagHandler.TemplateFlag, flagHandler.ProjectNameFlag},
 		},
 	}
 }

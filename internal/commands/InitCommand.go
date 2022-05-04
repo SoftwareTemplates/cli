@@ -7,7 +7,11 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func getProjectName() string {
+func getProjectName(ctx *cli.Context) string {
+
+	if ctx.String("projectName") != "" {
+		return ctx.String("projectName")
+	}
 	prompt := promptui.Prompt{
 		Label: "Projectname",
 		Validate: func(s string) error {
@@ -22,7 +26,7 @@ func getProjectName() string {
 }
 
 func InitCommand(ctx *cli.Context) error {
-	projectName := getProjectName()
+	projectName := getProjectName(ctx)
 	name := templateLoader.GetTemplateName(ctx)
 	err := templateLoader.LoadTemplate(name, projectName)
 	if err != nil {
