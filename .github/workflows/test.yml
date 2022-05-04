@@ -20,7 +20,7 @@ jobs:
       - name: instal linter
         run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.45.2
       - name: Lint
-        run : golangci-lint run cmd internal
+        run : golangci-lint run cmd internal/**
   build:
     runs-on: ubuntu-latest
     steps:
