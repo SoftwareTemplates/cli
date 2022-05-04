@@ -61,25 +61,16 @@ func GetTemplateName(ctx *cli.Context) string {
 	return name
 }
 
-func LoadTemplate(templateName string) error {
+func LoadTemplate(templateName string, projectName string) error {
 
 	templates := GetAllTemplates()
 	if !checkTemplateInArray(templates, templateName) {
 		return errors.New("this template does not exist")
 	}
 	templateRepo := getTemplateByName(templates, templateName)
-	prompt := promptui.Prompt{
-		Label: "Projectname",
-		Validate: func(s string) error {
-			return nil
-		},
-	}
-	projectName, err := prompt.Run()
-	if err != nil {
-		return err
-	}
+
 	cmd := exec.Command("git", "clone", *templateRepo.HTMLURL)
-	err = cmd.Run()
+	err := cmd.Run()
 	if err != nil {
 		return err
 	}

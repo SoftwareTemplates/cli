@@ -31,6 +31,10 @@ func InitGitRepoIfRequired(ctx *cli.Context, projectName string) {
 	createGit := getShouldCreateGit(ctx)
 	if createGit {
 		fmt.Println("create")
-		exec.Command("git", "init")
+		cmd := exec.Command("git", "init", projectName)
+		err := cmd.Run()
+		if err != nil {
+			panic(err.Error())
+		}
 	}
 }
