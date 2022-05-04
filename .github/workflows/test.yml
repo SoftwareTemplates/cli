@@ -1,0 +1,29 @@
+name: Test
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.18
+      - uses: actions/checkout@v2
+      - name: Lint
+        run : golangci-lint run cmd internal
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+      - uses: actions/checkout@v2
+      - name: Build
+        run:
+          go build ./cmd/main.go
