@@ -10,6 +10,8 @@ import (
 	"os/exec"
 )
 
+// GetAllTemplates fetches all templates from the
+// github api and leaves out non-template repos
 func GetAllTemplates() []*github.Repository {
 	client := github.NewClient(nil)
 	options := &github.RepositoryListOptions{}
@@ -23,6 +25,8 @@ func GetAllTemplates() []*github.Repository {
 	return templates
 }
 
+// Checks if the template with the given name exists in the provided
+// list of repositorys
 func checkTemplateInArray(templates []*github.Repository, template string) bool {
 	inArray := false
 	for _, t := range templates {
@@ -32,6 +36,8 @@ func checkTemplateInArray(templates []*github.Repository, template string) bool 
 	}
 	return inArray
 }
+
+// Gets a specific template from the given list by its name
 func getTemplateByName(templates []*github.Repository, templateName string) *github.Repository {
 	for _, t := range templates {
 		if *t.Name == templateName {
@@ -41,6 +47,9 @@ func getTemplateByName(templates []*github.Repository, templateName string) *git
 	return nil
 }
 
+// GetTemplateName gets the name of the temlate
+// If no cli argument is provided a promt will be opened
+// to get the template name
 func GetTemplateName(ctx *cli.Context) string {
 	if ctx.String("template") != "" {
 		return ctx.String("template")
@@ -61,6 +70,8 @@ func GetTemplateName(ctx *cli.Context) string {
 	return name
 }
 
+// LoadTemplate handles all template and project specific data
+// and finally saves the project and renames it
 func LoadTemplate(templateName string, projectName string) error {
 
 	templates := GetAllTemplates()

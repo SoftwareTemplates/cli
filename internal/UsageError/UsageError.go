@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+// HandleUsageError handles all errors
 func HandleUsageError(ctx *cli.Context, err error, isSubcommand bool) error {
 	color.Red(err.Error())
 	os.Exit(0)

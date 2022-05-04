@@ -9,8 +9,12 @@ import (
 	"os"
 )
 
+// Inits the main console application
 func main() {
+
+	// Main command handler
 	handler := commandHandler.InternalHandler{}
+
 	app := &cli.App{
 		Name:         "SoftareTemplates",
 		Description:  "A simple cli tool for making initializing projects faster",
@@ -20,6 +24,7 @@ func main() {
 		Copyright:    "2022 Mathis Burger",
 	}
 
+	// Starts the app
 	err := app.Run(os.Args)
 	if err != nil {
 		log.Fatalln(err.Error())

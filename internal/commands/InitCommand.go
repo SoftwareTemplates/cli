@@ -7,8 +7,12 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+// Gets the project name from the input
+// If no cli argument is given it will use a promt
+// for selecting the project name
 func getProjectName(ctx *cli.Context) string {
 
+	// Check if cli argument exists
 	if ctx.String("projectName") != "" {
 		return ctx.String("projectName")
 	}
@@ -25,13 +29,19 @@ func getProjectName(ctx *cli.Context) string {
 	return projectName
 }
 
+// InitCommand executes all methods that are
+// required for initializing a project from template
 func InitCommand(ctx *cli.Context) error {
 	projectName := getProjectName(ctx)
 	name := templateLoader.GetTemplateName(ctx)
+
+	// Clones the project and deletes the old git repo
 	err := templateLoader.LoadTemplate(name, projectName)
 	if err != nil {
 		return err
 	}
+
+	// Creates a new git repo of it is required
 	templateInit.InitGitRepoIfRequired(ctx, projectName)
 	return nil
 }

@@ -8,6 +8,8 @@ import (
 	"os/exec"
 )
 
+// Checks if a git repository should be created
+// If there is no cli ingut given a promt will be opened
 func getShouldCreateGit(ctx *cli.Context) bool {
 	if ctx.Bool("initGit") {
 		return true
@@ -26,6 +28,8 @@ func getShouldCreateGit(ctx *cli.Context) bool {
 	return false
 }
 
+// InitGitRepoIfRequired executes the init git action and handles if the
+// repository should be initialized
 func InitGitRepoIfRequired(ctx *cli.Context, projectName string) {
 
 	createGit := getShouldCreateGit(ctx)
