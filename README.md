@@ -58,7 +58,7 @@ selected. If this flag is not provided the cli will open a input prompt
 
 <strong>Linux/MacOS: </strong>
 ```bash
-   sudo mv ./softwareTemplates /usr/bin/softwareTemplates
+   sudo mv ./softwareTemplates /usr/local/bin/softwareTemplates
 ```
 
 <strong>Windows:</strong><br>
