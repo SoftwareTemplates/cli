@@ -1,6 +1,8 @@
 package commands
 
 import (
+	"cli/internal/ScriptExecutor"
+	"cli/internal/formatter"
 	"cli/internal/templateInit"
 	"cli/internal/templateLoader"
 	"github.com/manifoldco/promptui"
@@ -36,12 +38,14 @@ func InitCommand(ctx *cli.Context) error {
 	name := templateLoader.GetTemplateName(ctx)
 
 	// Clones the project and deletes the old git repo
-	err := templateLoader.LoadTemplate(name, projectName)
+	err := templateLoader.LoadTemplate(name, formatter.FormatProjectName(projectName))
 	if err != nil {
 		return err
 	}
 
+	ScriptExecutor.ExecuteScript(projectName)
+
 	// Creates a new git repo of it is required
-	templateInit.InitGitRepoIfRequired(ctx, projectName)
+	templateInit.InitGitRepoIfRequired(ctx, formatter.FormatProjectName(projectName))
 	return nil
 }
