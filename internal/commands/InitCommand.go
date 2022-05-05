@@ -35,12 +35,20 @@ func getProjectName(ctx *cli.Context) string {
 // required for initializing a project from template
 func InitCommand(ctx *cli.Context) error {
 	projectName := getProjectName(ctx)
-	name := templateLoader.GetTemplateName(ctx)
 
-	// Clones the project and deletes the old git repo
-	err := templateLoader.LoadTemplate(name, formatter.FormatProjectName(projectName))
-	if err != nil {
-		return err
+	customTemlateFlag := ctx.String("customTemplateUrl")
+
+	if customTemlateFlag != "" {
+		err := templateLoader.LoadTemplate(customTemlateFlag, formatter.FormatProjectName(projectName), true)
+		if err != nil {
+			return err
+		}
+	} else {
+		name := templateLoader.GetTemplateName(ctx)
+		err := templateLoader.LoadTemplate(name, formatter.FormatProjectName(projectName), false)
+		if err != nil {
+			return err
+		}
 	}
 
 	ScriptExecutor.ExecuteScript(projectName)

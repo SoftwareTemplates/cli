@@ -49,6 +49,12 @@ the cli will open a prompt to select a template
 If this flag is added to the init command, the project name will automatically
 selected. If this flag is not provided the cli will open a input prompt
 
+4. `--customTemplateUrl`
+If you want to use templates that are not from the softwareTemplates cli, you
+can do so with this flag. Just insert the git url of you repository and the template
+will be used.<br>
+<strong>NOTE: The templates must have the valid init structure. Otherwise it will not work with the cli.
+
 
 # Installation
 
@@ -63,4 +69,18 @@ selected. If this flag is not provided the cli will open a input prompt
 
 <strong>Windows:</strong><br>
 Move copy your file to `C:\Program Files`
+
+# Creating templates
+
+If you want to create your own project template for this cli, you can 
+create a new repository and start writing your project infrastructure.
+
+If you want to use shell scripts to initialize your project you can
+put files called `init.sh` and `init.bat` into your root directory of the 
+repository. 
+If you want your project to be supported directly by the cli, you can try to transfer 
+the ownership of your repository to the SoftwareTemplates organisation.
+But I will check your template, because the cli only supports safe templates out of the box.
+
+If you want to use a custom repository use the `--customTemplateUrl` flag for using foreign templates.
 

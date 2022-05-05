@@ -1,6 +1,7 @@
 package templateLoader
 
 import (
+	"cli/internal/formatter"
 	"context"
 	"errors"
 	"github.com/google/go-github/github"
@@ -72,24 +73,28 @@ func GetTemplateName(ctx *cli.Context) string {
 
 // LoadTemplate handles all template and project specific data
 // and finally saves the project and renames it
-func LoadTemplate(templateName string, projectName string) error {
+func LoadTemplate(templateName string, projectName string, customTemplate bool) error {
 
 	templates := GetAllTemplates()
-	if !checkTemplateInArray(templates, templateName) {
+	if !checkTemplateInArray(templates, templateName) && !customTemplate {
 		return errors.New("this template does not exist")
 	}
-	templateRepo := getTemplateByName(templates, templateName)
-
-	cmd := exec.Command("git", "clone", *templateRepo.HTMLURL)
+	cmd := exec.Command("git", "clone", templateName)
+	projectPath := formatter.FormatProjectName(templateName)
+	if !customTemplate {
+		templateRepo := getTemplateByName(templates, templateName)
+		cmd = exec.Command("git", "clone", *templateRepo.HTMLURL)
+		projectPath = *templateRepo.Name
+	}
 	err := cmd.Run()
 	if err != nil {
 		return err
 	}
-	err = os.RemoveAll("./" + *templateRepo.Name + "/.git")
+	err = os.RemoveAll("./" + projectPath + "/.git")
 	if err != nil {
 		return err
 	}
-	err = os.Rename("./"+*templateRepo.Name, "./"+projectName)
+	err = os.Rename("./"+projectPath, "./"+projectName)
 	if err != nil {
 		return err
 	}

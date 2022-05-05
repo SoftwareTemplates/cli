@@ -31,7 +31,12 @@ func (h InternalHandler) HandleCommand() []*cli.Command {
 			Aliases: []string{"i"},
 			Usage:   "Creates a project base on a template",
 			Action:  commands.InitCommand,
-			Flags:   []cli.Flag{flagHandler.InitGitFlag, flagHandler.TemplateFlag, flagHandler.ProjectNameFlag},
+			Flags: []cli.Flag{
+				flagHandler.InitGitFlag,
+				flagHandler.TemplateFlag,
+				flagHandler.ProjectNameFlag,
+				flagHandler.CustomTemplateUrlFlag,
+			},
 		},
 	}
 }

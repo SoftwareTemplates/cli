@@ -23,11 +23,17 @@ var ProjectNameFlag = &cli.StringFlag{
 	Usage:   "The name of the project that should be used",
 }
 
+var CustomTemplateUrlFlag = &cli.StringFlag{
+	Name:  "customTemplateUrl",
+	Usage: "If a custom template should be used that is not supported by the cli",
+}
+
 // HandleFlags returns all flags that are supported in the project
 func HandleFlags() []cli.Flag {
 	return []cli.Flag{
 		InitGitFlag,
 		TemplateFlag,
 		ProjectNameFlag,
+		CustomTemplateUrlFlag,
 	}
 }

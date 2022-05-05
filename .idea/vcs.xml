@@ -6,6 +6,8 @@
     <mapping directory="$PROJECT_DIR$/finaltest" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/hitler" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/htiler" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/moin" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/test" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/test-template" vcs="Git" />
   </component>
 </project>

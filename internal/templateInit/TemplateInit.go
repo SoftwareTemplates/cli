@@ -1,7 +1,6 @@
 package templateInit
 
 import (
-	"fmt"
 	"github.com/fatih/color"
 	"github.com/manifoldco/promptui"
 	"github.com/urfave/cli/v2"
@@ -34,7 +33,6 @@ func InitGitRepoIfRequired(ctx *cli.Context, projectName string) {
 
 	createGit := getShouldCreateGit(ctx)
 	if createGit {
-		fmt.Println("create")
 		cmd := exec.Command("git", "init", projectName)
 		err := cmd.Run()
 		if err != nil {
