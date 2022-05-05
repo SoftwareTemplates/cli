@@ -22,6 +22,8 @@ func main() {
 		Flags:        flagHandler.HandleFlags(),
 		OnUsageError: UsageError.HandleUsageError,
 		Copyright:    "2022 Mathis Burger",
+		HelpName:     "Setup your projects faster",
+		Version:      "1.3.0",
 	}
 
 	// Starts the app
