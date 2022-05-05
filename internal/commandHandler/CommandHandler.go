@@ -38,6 +38,13 @@ func (h InternalHandler) HandleCommand() []*cli.Command {
 				flagHandler.CustomTemplateUrlFlag,
 			},
 		},
+		&cli.Command{
+			Name:    "templates",
+			Aliases: []string{"t"},
+			Action:  commands.TemplatesCommand,
+			Flags:   []cli.Flag{},
+			Usage:   "Lists all offical templates that are provided by the cli",
+		},
 	}
 }
 
